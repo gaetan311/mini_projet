@@ -135,7 +135,7 @@ def plot_boxplot(df: pd.DataFrame, column: str, output_path: str):
 def plot_pie_plot(df: pd.DataFrame, column: str, output_path: str):
     """Génère un diagramme circulaire (Pie Plot) pour une variable catégorielle."""
     plt.figure(figsize=(6, 4))
-    df[column].value_counts().plot.pie(autopct='%1.1f%%', cmap='pastel', startangle=90)
+    df[column].value_counts().plot.pie(autopct='%1.1f%%', cmap='pastel1', startangle=90)
     plt.ylabel('')
     plt.title(f"Proportions de {column}")
     plt.savefig(output_path, bbox_inches='tight')
@@ -165,7 +165,7 @@ def train_predictive_model(df: pd.DataFrame, target_col: str, feature_cols: list
     model.fit(X_train, y_train)
     predictions = model.predict(X_test)
 
-    rmse = mean_squared_error(y_test, predictions, squared=False)
+    rmse = mean_squared_error(y_test, predictions)
     r2 = r2_score(y_test, predictions)
     print(f"🤖 [Supervisé] Modèle entraîné. R²: {r2:.2f} | RMSE: {rmse:.2f}")
     return {"type": "Supervisé", "r2": f"{r2:.2f}", "rmse": f"{rmse:.2f}"}
